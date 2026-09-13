@@ -2,18 +2,13 @@
 
 > **Research project:** Extending Temporal Efficient Training (TET) to Spiking Neural Networks for event-based visual recognition, with a focus on the IBM DVS128 Gesture benchmark.
 
-## Tech Stack
+## 🛠️ Tech Stack
 
-- **Python 3.12+**
-- **PyTorch 2.x** — deep learning, training, autograd
-- **CUDA / NVIDIA GPU** — accelerated SNN training (Kaggle Tesla T4/P100 compatible)
-- **NumPy** — numerical computation
-- **Pandas** — experiment tables and metrics
-- **Matplotlib** — training curves, evaluation plots, and result visualization
-- **Jupyter Notebook / Kaggle** — primary experimental environment
-- **Spiking Neural Networks (SNNs)** — temporal event-based computation
-- **Temporal Efficient Training (TET)** — temporal regularization / loss formulation
-- **VGG-style SNN architecture** — convolutional spiking backbone
+<p align="left">
+  <img src="https://skillicons.dev/icons?i=python,pytorch,cuda,numpy,pandas,matplotlib,jupyter,github&perline=8" alt="Tech stack icons" />
+</p>
+
+**Python · PyTorch · CUDA · NumPy · Pandas · Matplotlib · Jupyter · GitHub · SNN · TET · VGG-style SNN**
 
 ---
 
