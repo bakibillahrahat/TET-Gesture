@@ -1,16 +1,18 @@
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.12+-3776AB?logo=python&logoColor=white" alt="Python" />
+  <img src="https://img.shields.io/badge/PyTorch-2.x-EE4C2C?logo=pytorch&logoColor=white" alt="PyTorch" />
+  <img src="https://img.shields.io/badge/CUDA-NVIDIA-76B900?logo=nvidia&logoColor=white" alt="CUDA" />
+  <img src="https://img.shields.io/badge/NumPy-013243?logo=numpy&logoColor=white" alt="NumPy" />
+  <img src="https://img.shields.io/badge/Pandas-150458?logo=pandas&logoColor=white" alt="Pandas" />
+  <img src="https://img.shields.io/badge/Matplotlib-11557C?logo=matplotlib&logoColor=white" alt="Matplotlib" />
+  <img src="https://img.shields.io/badge/Jupyter-F37626?logo=jupyter&logoColor=white" alt="Jupyter" />
+  <img src="https://img.shields.io/badge/SNN-Spiking%20Neural%20Networks-6A1B9A" alt="Spiking Neural Networks" />
+  <img src="https://img.shields.io/badge/TET-Temporal%20Efficient%20Training-0A7EA4" alt="Temporal Efficient Training" />
+</p>
+
 # TET-Gesture: Temporal Efficient Training for Neuromorphic Gesture Recognition
 
 > **Research project:** Extending Temporal Efficient Training (TET) to Spiking Neural Networks for event-based visual recognition, with a focus on the IBM DVS128 Gesture benchmark.
-
-## 🛠️ Tech Stack
-
-<p align="left">
-  <img src="https://skillicons.dev/icons?i=python,pytorch,cuda,numpy,pandas,matplotlib,jupyter,github&perline=8" alt="Tech stack icons" />
-</p>
-
-**Python · PyTorch · CUDA · NumPy · Pandas · Matplotlib · Jupyter · GitHub · SNN · TET · VGG-style SNN**
-
----
 
 ## Overview
 
@@ -127,12 +129,6 @@ The current notebook provides a centralized `CONFIG` dictionary. Important defau
 
 The primary target is the event-based **DVS128 Gesture** benchmark with **11 classes**. The dataset contains temporal streams captured by a Dynamic Vision Sensor (DVS) during human gesture demonstrations.
 
-Expected class configuration:
-
-```text
-11 classes
-```
-
 ### CIFAR10-DVS
 
 The implementation also supports the **CIFAR10-DVS** benchmark with 10 object classes:
@@ -141,8 +137,6 @@ The implementation also supports the **CIFAR10-DVS** benchmark with 10 object cl
 airplane, automobile, bird, cat, deer,
 dog, frog, horse, ship, truck
 ```
-
-The dataset loader is designed to discover nested dataset structures and construct reproducible train/validation/test partitions.
 
 ---
 
@@ -159,21 +153,6 @@ TET-Gesture/
     └── tables/
 ```
 
-### Main notebook
-
-`tet-dvs128-gesture-kaggle.ipynb` is the primary executable research artifact. It contains the environment setup, reproducibility configuration, data pipeline, SNN implementation, TET training, evaluation, and experiment-output generation.
-
-### Results directory
-
-The notebook is configured to organize generated artifacts into:
-
-- `results/figures/` — plots and visualizations
-- `results/metrics/` — numerical evaluation metrics
-- `results/predictions/` — model predictions
-- `results/tables/` — experiment tables
-
----
-
 ## Getting Started
 
 ### 1. Clone the repository
@@ -187,25 +166,13 @@ cd TET-Gesture
 
 The notebook was developed for a GPU-enabled Python environment such as Kaggle with an NVIDIA GPU.
 
-Core packages:
-
 ```bash
 pip install numpy pandas matplotlib torch torchvision jupyter
 ```
 
-> For Kaggle execution, most of the required Python stack is already available.
+### 3. Configure DVS128 Gesture
 
-### 3. Configure the dataset
-
-Open:
-
-```text
-tet-dvs128-gesture-kaggle.ipynb
-```
-
-and update the dataset configuration in `CONFIG`.
-
-For DVS128 Gesture, configure:
+Open `tet-dvs128-gesture-kaggle.ipynb` and update the dataset configuration:
 
 ```python
 CONFIG["dataset_name"] = "DVS128 Gesture"
@@ -215,23 +182,11 @@ CONFIG["dataset_root"] = Path("/path/to/DvsGesture")
 
 ### 4. Run the notebook
 
-Execute the notebook from top to bottom. The pipeline will:
-
-1. Detect the available accelerator.
-2. Initialize deterministic experiment settings.
-3. Discover and parse the dataset.
-4. Build train/validation/test splits.
-5. Construct the VGG-style SNN.
-6. Train the conventional baseline.
-7. Train the TET configuration.
-8. Evaluate both configurations.
-9. Save metrics, predictions, tables, checkpoints, and figures when enabled.
+Execute the notebook from top to bottom. The pipeline will detect the accelerator, initialize reproducible settings, load the dataset, build the VGG-style SNN, train baseline and TET models, evaluate them, and save experiment outputs.
 
 ---
 
 ## Baseline vs. TET
-
-The project is structured around a controlled comparison:
 
 | Experiment | TET | Purpose |
 |---|---:|---|
@@ -240,13 +195,9 @@ The project is structured around a controlled comparison:
 | Ablation | Configurable | Study sensitivity to TET components |
 | Multi-seed | Configurable | Measure robustness across random seeds |
 
-This structure is intended to keep the experimental comparison reproducible and easy to extend.
-
----
-
 ## Research Outputs
 
-The experiment pipeline is designed to produce research-ready artifacts including:
+The experiment pipeline is designed to produce:
 
 - Training and validation curves
 - Accuracy/loss comparisons
@@ -258,44 +209,19 @@ The experiment pipeline is designed to produce research-ready artifacts includin
 - Ablation results
 - Multi-seed summaries
 
-Numerical claims should be taken from the generated files in `results/` after the corresponding experiment has been executed.
-
----
+Numerical claims should be taken from generated files in `results/` after the corresponding experiment has been executed.
 
 ## Reproducibility
 
-The project uses a fixed default seed of `42` and provides deterministic seed initialization for Python, NumPy, and PyTorch.
+The project uses a fixed default seed of `42` and provides deterministic seed initialization for Python, NumPy, and PyTorch. Optional seeds include `42`, `123`, and `2026`.
 
-For stronger statistical reporting, the configuration also includes optional seeds:
-
-```text
-42, 123, 2026
-```
-
-GPU execution can still exhibit implementation- or hardware-dependent nondeterminism despite deterministic seed settings. Reported results should therefore include the execution environment and, where possible, multiple seeds.
-
----
+GPU execution can still exhibit implementation- or hardware-dependent nondeterminism. Where possible, report multiple seeds and the execution environment.
 
 ## Computational Notes
 
-The implementation includes GPU detection and CUDA memory diagnostics. It is intended primarily for GPU execution, particularly Kaggle environments with Tesla T4/P100-class accelerators.
-
-Memory-conscious features include:
-
-- Small micro-batches
-- Gradient accumulation
-- Optional mixed precision support
-- CUDA memory configuration
-- Explicit garbage collection
-- Checkpoint/output management
-
-The current configuration uses **FP32** by default to preserve numerical stability during the research experiments.
-
----
+The implementation is intended primarily for GPU execution, particularly Kaggle environments with Tesla T4/P100-class accelerators. Memory-conscious features include small micro-batches, gradient accumulation, optional mixed precision, CUDA memory configuration, and explicit garbage collection.
 
 ## Citation
-
-If you use the TET method, please cite the original work:
 
 ```bibtex
 @inproceedings{deng2022tet,
@@ -306,23 +232,15 @@ If you use the TET method, please cite the original work:
 }
 ```
 
-For this repository and any resulting research publication, please cite this implementation as appropriate.
-
----
-
 ## Project Status
 
 **Research / Experimental**
-
-The repository is intended for reproducible experimentation on temporal learning in SNNs. Final performance conclusions should be based on completed baseline, TET, ablation, and multi-seed experiments rather than a single training run.
 
 ## Author
 
 **Md. Bakibillah Rahat**  
 Computer Science & Engineering  
 GitHub: [@bakibillahrahat](https://github.com/bakibillahrahat)
-
----
 
 ## License
 
