@@ -1,0 +1,4 @@
+Model / Method,Test Accuracy (%),Balanced Acc (%),Macro Precision (%),Macro Recall (%),Macro F1 (%)
+Baseline SNN (SDT),71.47,71.47,71.82,71.47,71.38
+TET SNN (Ours),63.47,63.47,63.55,63.47,62.68
+Δ Absolute Improvement,-8.0,-8.0,-8.27,-8.0,-8.7
